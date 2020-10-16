@@ -1,1 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+
+body,html{
+    padding:0px;
+    margin:0px;
+}
+
+.jumbotron {
+    background-image:url('backgroud.jpg');
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-attachment: fixed;
+    background-size:cover;
+    height:800px;
+}
+.doc-img{
+    background-image:url('docbg.jpeg');
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-attachment: fixed;
+    background-size:cover;
+    height:800px;
+}
+
+.text-color{
+    color:#3732B5;
+}
+
+.z-index-high{
+    z-index: 2;
+}
+
+.z-index-low{
+    z-index: 1;
+}
+
+.color-nav{
+    background-color:#E9F7EF ;
+}
+.font-change{
+    font-family: "Forte";
+}
