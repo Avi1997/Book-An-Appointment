@@ -8,13 +8,17 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { DoctorHomeComponent } from './doctor-home/doctor-home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ReportComponent } from './doctor-home/report/report.component';
+import { AppointmentComponent } from './doctor-home/appointment/appointment.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
     HomepageComponent,
-    DoctorHomeComponent
+    DoctorHomeComponent,
+    ReportComponent,
+    AppointmentComponent
   ],
   imports: [
     BrowserModule,
