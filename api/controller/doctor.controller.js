@@ -18,7 +18,7 @@ app.get('/appointment/:docid', auth, (req, res) => {
     try {
         const docid = req.params.docid;
         const date = new Date().toISOString();
-        const squery = "select * from appointment where doc_id ='" + docid + "' and app_date >='" + date + "'";
+        const squery = "select * from appointment where doc_id =" + docid + " order by app_date";
         sql.query(squery, (err, resu) => {
             if (err) {
                 throw err;
@@ -51,9 +51,10 @@ app.get('/appointment/date/:docid/:date', auth, (req, res) => {
 app.post('/appointment/status', auth, (req, res) => {
     try {
         const docid = req.body.doc_id;
+        const app_id = req.body.app_id;
         const status = req.body.status;
-        const squery = "update  appointment set app_status = '"+status+"' where doc_id =" + docid + " ";
-        console.log(squery)
+        const squery = "update  appointment set app_status = '"+status+"' where doc_id =" + docid + " and app_id ="+app_id;
+      
         sql.query(squery, (err, resu) => {
             if (err) {
                 throw err;

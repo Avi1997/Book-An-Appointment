@@ -45,5 +45,6 @@ insert into appointment (app_date,app_time,doc_id,patient_name,patient_email,pat
 
 insert into appointment (app_date,app_time,doc_id,patient_name,patient_email,patient_phone,app_status)values ('2020-11-11','09:30:00',2,'don','some@sws.com','123456789','OPEN');
 select * from appointment where doc_id = 1 and app_date >= '2020-10-18';
+select * from appointment;
 
 select * from doctor inner join user on doctor.user_id = user.user_id where user.user_id ='avinash78' and user.password='$2b$08$WcQ7EMziYxsyhPJBnot7Sef6aClh033uCxzBlHqu.ycR1oCE9dbuK';  

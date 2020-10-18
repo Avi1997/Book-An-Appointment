@@ -1,5 +1,5 @@
 export interface Appointment {
-  id?:number,
+  app_id?:number,
   app_date:string;
   app_time:string;
   doc_id:number;

@@ -1,12 +1,14 @@
 <div class="container mrt-ex">
 
 <h2>APPOINTMENT DETAILS</h2>
-
-<div>
+<div *ngIf="noOppointment">
+  <h1 class="text-danger"> NO APPOINTMENT</h1>
+</div>
+<div  *ngIf="!noOppointment">
  <b>Filter By Date : </b> 
  <input [ngModel]="startDate | date:'yyyy-MM-dd'" (ngModelChange)="dateFilter($event)" type="date" name="startDate"/>
 </div>
-<table class="table table-striped mt-5">
+<table class="table table-striped mt-5" *ngIf="!noOppointment">
   <thead>
   <tr>
     <th scope="col">DATE</th>
@@ -17,15 +19,15 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let country of countries">
-    <th scope="row">{{ country.id }}</th>
+  <tr *ngFor="let app of appointment">
+    <th scope="row">{{ app.app_date }}</th>
     <td>
-      <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + country.flag" class="mr-2" style="width: 20px">
-      {{ country.name }}
+      
+      {{ app.patient_name }}
     </td>
-    <td>{{ country.area | number }}</td>
-    <td>{{ country.population | number }}</td>
-    <td><a  class="pin-point" (click)="changeStatus(content,country.id)">edit</a></td>
+    <td>{{ app.app_time  }}</td>
+    <td>{{ app.app_status  }}</td>
+    <td><a  class="pin-point" (click)="changeStatus(content,app.app_id)">edit</a></td>
   </tr>
   </tbody>
 </table>

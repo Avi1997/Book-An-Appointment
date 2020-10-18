@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticateService } from '../site/authenticate.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
   navbarIcon : string = "keyboard_arrow_down";
-  constructor() { }
+  login=false;
+  constructor(private auth:AuthenticateService) { }
 
   ngOnInit(): void {
+    this.login = this.auth.islogin();
   }
 
 dropDownButtonClick(){

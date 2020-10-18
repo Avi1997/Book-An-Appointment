@@ -2,6 +2,7 @@ import { Component, OnInit, Directive, EventEmitter, Input, Output, QueryList, V
 import { AppointmentService } from '../appontment/appointment.service';
 import { Appointment} from './interface/appointment';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { AuthenticateService } from 'src/app/site/authenticate.service';
 
 @Component({
   selector: 'app-appointment',
@@ -9,22 +10,36 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./appointment.component.css']
 })
 export class AppointmentComponent implements OnInit {
-  countries:Appointment[];
+  appointment:Appointment[];
   startDate: Date = new Date();
   options =[{key:"OPEN",value:"Open"},{key:"CLOSED",value:"Close"},{key:"CANCELLED",value:"Cancel"}];
   closeResult = '';
   modalStatus = 'OPEN';
+  noOppointment = false;
+  app_id ;
 
-  constructor(private appointmentService:AppointmentService,private modalService: NgbModal){}
+  constructor(private appointmentService:AppointmentService,private modalService: NgbModal,private authService:AuthenticateService){}
 
   ngOnInit(){
-    this.countries= this.appointmentService.getAppontment();
+    this.appointmentService.getAppontment().subscribe((res:Appointment[])=>{
+      
+      this.appointment = res;
+    },(error =>{
+      this.noOppointment = true;
+    }));
     this.startDate = new Date();
-    this.countries.sort(function(a, b) {
-      return a.id - b.id;
-    });
+    if(this.appointment){
+    this.appointment.sort( (a,b) => this.sortByDate( a.app_date, b.app_date ));
+    }else{
+      this.noOppointment = false;
+    }
   }
   dateFilter(value:any){
+    this.appointmentService.getByDateAppontment(value).subscribe((res:Appointment[])=>{
+      this.appointment = res;
+    },(error =>{
+      this.noOppointment = true;
+    }));
   }
    sortByDate( a, b ) {
     if ( a.created_at < b.created_at ){
@@ -37,6 +52,7 @@ export class AppointmentComponent implements OnInit {
   }
 
   changeStatus(content,id){
+    this.app_id =id;
       this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
         this.closeResult = `Closed with: ${result}`;
       }, (reason) => {
@@ -54,7 +70,9 @@ export class AppointmentComponent implements OnInit {
     }
 
     closeModal(){
-      console.log("**",this.modalStatus)
+     this.appointmentService.changeAppointmentStatus(this.authService.getdocId(),this.modalStatus,this.app_id ).subscribe(res =>{
+       this.ngOnInit();
+     });
     }
   
 }

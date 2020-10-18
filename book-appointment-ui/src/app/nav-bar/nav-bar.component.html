@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg shadow  navbar-inverse  color-nav fixed-top   px-3 py-4 z-index-high" id="header">
+<nav class="navbar navbar-expand-md shadow  navbar-inverse  color-nav fixed-top   px-3 py-4 z-index-high" id="header">
     <a routerLink="" class="navbar-brand text-danger  font-weight-bold"><i
             class="material-icons mr-2 pb-1">local_pharmacy</i> MED-SUP</a>
     <button class="navbar-toggler outline-none border border-0" (click)="dropDownButtonClick()" type="button"
@@ -20,8 +20,8 @@
                 <a class="nav-link font-weight-bold mx-3 text-danger" routerLink="/initialize"><i
                         class="material-icons text-danger h3 ">add</i></a>
             </li>
-            <li class="nav-item">
-                <a class="btn btn-outline-success my-2  mx-3 my-sm-1 font-weight-bold " routerLink="/sign-in">SIGN
+            <li class="nav-item" *ngIf="!login">
+                <a class="btn btn-outline-success my-2  mx-3 my-sm-1 font-weight-bold " routerLink="/sign-in">SIGN {{login}}
                     IN</a>
             </li>
         </ul>
