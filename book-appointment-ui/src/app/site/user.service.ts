@@ -20,6 +20,8 @@ export class UserService {
     return this.http.post(this.baseUrl+"user/signup", user);
   }
 
+  
+
   getGenders() {
     return this.gender;
   }

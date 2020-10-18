@@ -9,7 +9,7 @@ import { ReportService } from './report.service';
   styleUrls: ['./report.component.css']
 })
 export class ReportComponent implements OnInit {
-  countries:Appointment[];
+  countries:any[];
   startDate: Date = new Date();
 
   constructor(private reportService:ReportService){}

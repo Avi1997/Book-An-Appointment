@@ -9,7 +9,7 @@
     <div class="alert alert-success mt-4" role="alert" *ngIf="successMsg">
         <strong>
             APPOINTMENT BOOKED Successfully !!
-            <a routerLink="/login">
+            <a routerLink="">
                 click here
             </a>
             to GO TO HOME PAGE !!
@@ -112,7 +112,7 @@
                         <label for="doctor">Select Doctor</label>
                         <span *ngIf="appointment.get('doctorDivision').get('doctor').touched;else elseDoctorBlock">
                         <select id="doctor" class="form-control" formControlName="doctor">
-                            <option *ngFor="let doctor of doctors" [value]="doctor">{{doctor}}</option>
+                            <option *ngFor="let doctor of doctors" [value]="doctor.doc_id">{{doctor.name}}</option>
                         </select>
                         <div class="text-danger position-absolute small"
                             *ngIf="appointment.get('doctorDivision').get('doctor').errors?.required">
@@ -121,7 +121,7 @@
                         </span>
                         <ng-template #elseDoctorBlock>
                             <select id="doctor" class="form-control" formControlName="doctor">
-                                <option *ngFor="let doctor of doctors" [value]="doctor">{{doctor}}</option>
+                                <option *ngFor="let doctor of doctors" [value]="doctor.doc_id">{{doctor.name}}</option>
                             </select>
                         </ng-template>
                     </div>

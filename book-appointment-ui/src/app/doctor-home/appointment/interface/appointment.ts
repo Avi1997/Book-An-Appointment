@@ -1,9 +1,12 @@
 export interface Appointment {
-  id: number;
-  name: string;
-  flag: string;
-  area: number;
-  population: number;
+  id?:number,
+  app_date:string;
+  app_time:string;
+  doc_id:number;
+  patient_name:string;
+  patient_email:string;
+  patient_phone;
+  app_status:string;
 }
 
   export interface SortEvent {

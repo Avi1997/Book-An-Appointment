@@ -5,7 +5,7 @@ const auth = require('./auth.controller');
 
 app.get('/doctors', (req, res) => {
     try {
-        const sq = "select name from doctor";
+        const sq = "select name,doc_id from doctor";
         sql.query(sq, (err, result) => {
             res.send(result);
         });
