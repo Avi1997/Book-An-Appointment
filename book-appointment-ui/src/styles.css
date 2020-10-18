@@ -26,6 +26,10 @@ body,html{
     color:#3732B5;
 }
 
+.pin-point{
+    cursor: pointer;
+}
+
 .z-index-high{
     z-index: 2;
 }
@@ -39,4 +43,8 @@ body,html{
 }
 .font-change{
     font-family: "Forte";
+}
+
+.mt-extra{
+    margin-top: 142px;
 }

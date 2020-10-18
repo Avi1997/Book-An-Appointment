@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Appointment } from '../appointment/interface/appointment';
+import { Report } from './Interface/Report';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AppointmentService {
-   COUNTRIES: Appointment[] =  [
+export class ReportService {
+  COUNTRIES: Report[] =  [
     {
       id: 12,
       name: 'Russia',
@@ -37,7 +37,8 @@ export class AppointmentService {
   ];
   constructor() { }
 
-  getAppontment(){
+  getAllReport(){
+    //this.getAllReport();
     return this.COUNTRIES;
-    }
+  }
 }

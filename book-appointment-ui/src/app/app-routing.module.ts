@@ -4,11 +4,15 @@ import { AppointmentComponent } from './doctor-home/appointment/appointment.comp
 import { DoctorHomeComponent } from './doctor-home/doctor-home.component';
 import { ReportComponent } from './doctor-home/report/report.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { LoginComponent } from './site/login/login.component';
+import { SignupComponent } from './site/signup/signup.component';
 
 const routes: Routes = [{path:'',component:HomepageComponent},
 {path:'doc-home',component:DoctorHomeComponent},
 {path:'show-report',component:ReportComponent},
-{path:'view-appointment', component:AppointmentComponent}
+{path:'view-appointment', component:AppointmentComponent},
+{path:'sign-in',component:LoginComponent},
+{path:'initialize',component:SignupComponent}
 ];
 
 @NgModule({

@@ -10,6 +10,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ReportComponent } from './doctor-home/report/report.component';
 import { AppointmentComponent } from './doctor-home/appointment/appointment.component';
+import { LoginComponent } from './site/login/login.component';
+import { SignupComponent } from './site/signup/signup.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,9 @@ import { AppointmentComponent } from './doctor-home/appointment/appointment.comp
     HomepageComponent,
     DoctorHomeComponent,
     ReportComponent,
-    AppointmentComponent
+    AppointmentComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -26,6 +31,7 @@ import { AppointmentComponent } from './doctor-home/appointment/appointment.comp
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

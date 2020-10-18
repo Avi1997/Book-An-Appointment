@@ -1,8 +1,9 @@
 export interface Appointment {
+  id: number;
   name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+  flag: string;
+  area: number;
+  population: number;
 }
 
   export interface SortEvent {

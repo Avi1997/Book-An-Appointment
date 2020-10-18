@@ -5,3 +5,11 @@ table {
   th.mat-sort-header-sorted {
     color: black;
   }
+
+  .mrt-ex{
+    padding-top: 150px;
+  }
+
+  .ex-mr-5{
+    margin-top: 150px;
+  }
