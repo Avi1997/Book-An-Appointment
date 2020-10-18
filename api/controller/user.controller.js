@@ -1,15 +1,26 @@
-const { Router, query } = require('express');
+const { Router } = require('express');
 const jwt = require('jsonwebtoken');
 const express = require('express');
 const bcrypt = require('bcrypt');
 const app = express.Router();
-const auth = require('./auth.controller')
-const sql = require('../config/mysql')
+const sql = require('../config/mysql');
+const atob = require('atob');
 
-app.get("/login", auth, async (req, res) => {
-    //console.log(Buffer.from(b64Encoded, 'base64').toString());
-    const query = "select * from user where username ='"+req.body;
-    return res.end("{hello:'USER'}")
+app.get("/login", async (req, res) => {
+    try {
+        const password = atob(req.body.password);
+        const squery = "select doctor.user_id,user.name,doctor.doc_id,user.token from doctor inner join user on doctor.user_id = user.user_id "+"where user.user_id ='" + req.body.user_id + "' and user.password ='" + password + "'";
+       console.log(squery);
+        sql.query(squery, (err, resu, field) => {
+            if (err) {
+                throw err;
+            }
+            res.status(201).send(resu[0]);
+        });
+    } catch (e) {
+        res.status(401).send(e);
+    }
+
 })
 app.post('/signup', async (req, res) => {
     try {
@@ -22,24 +33,24 @@ app.post('/signup', async (req, res) => {
             password: password
         }
 
-        const doctor ={
+        const doctor = {
             ...user,
-            appointment_slot_time : req.body.appointment_slot_time, 
-            day_start : req.body.day_start,
-            day_end : req.body.day_end
+            appointment_slot_time: req.body.appointment_slot_time,
+            day_start: req.body.day_start,
+            day_end: req.body.day_end
         }
-       
-        var sqlQuery = "INSERT into user (user_id,name,email,password,token) values('"+user.user_id+"','"+user.name+"','"+user.email+"','"+user.password+"','"+token+"')";
 
-         await sql.query(sqlQuery, (err, resu) => {
+        var sqlQuery = "INSERT into user (user_id,name,email,password,token) values('" + user.user_id + "','" + user.name + "','" + user.email + "','" + user.password + "','" + token + "')";
+
+        await sql.query(sqlQuery, (err, resu) => {
             if (err) { throw err }
         });
 
-         sqlQuery = "INSERT into doctor (user_id,name,email,appointment_slot_time,day_start,day_end) values('"+doctor.user_id+"','"+doctor.name+"','"+doctor.email+"','"+doctor.appointment_slot_time+"','"+doctor.day_start+"','"+doctor.day_end+"')";
+        sqlQuery = "INSERT into doctor (user_id,name,email,appointment_slot_time,day_start,day_end) values('" + doctor.user_id + "','" + doctor.name + "','" + doctor.email + "','" + doctor.appointment_slot_time + "','" + doctor.day_start + "','" + doctor.day_end + "')";
         await sql.query(sqlQuery, (err, resu) => {
-           if (err) { throw err }
-           res.status(201).send({ user, token })
-       });
+            if (err) { throw err }
+            res.status(201).send({ user, token })
+        });
 
     } catch (e) {
         console.log(e);

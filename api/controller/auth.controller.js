@@ -5,9 +5,9 @@ const sql = require('../config/mysql')
 
 const auth = async (req, res, next) => {
     try {
-        const token = req.header('Authorization').replace('Bearer ', '')
-        const decoded = jwt.verify(token, 'avinash')
-        const query = "select * from user where username = '"+decoded+"'";
+        const token = req.header('Authorization').replace('Bearer ', '');
+        const decoded = jwt.verify(token, 'avinash');
+        const query = "select * from user where user_id = '"+decoded+"'";
         
         mysqlConnection.query(query, (err,result,fields) => {
             if(err){
