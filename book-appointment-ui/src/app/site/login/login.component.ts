@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   }
   loginAuthenticate(loginForm) {
     this.infoFlag = false;
+    console.log(loginForm)
    /*this.authenticationService.authenticate(loginForm.value.username,loginForm.value.password).subscribe((response)=>{
       this.authenticationService.setToken(response.token);
       this.authenticationService.setRole(response.role);

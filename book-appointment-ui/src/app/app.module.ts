@@ -13,6 +13,7 @@ import { AppointmentComponent } from './doctor-home/appointment/appointment.comp
 import { LoginComponent } from './site/login/login.component';
 import { SignupComponent } from './site/signup/signup.component';
 import { CommonModule } from '@angular/common';
+import { BookAppointmentComponent } from './homepage/book-appointment/book-appointment.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { CommonModule } from '@angular/common';
     ReportComponent,
     AppointmentComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    BookAppointmentComponent
   ],
   imports: [
     BrowserModule,
