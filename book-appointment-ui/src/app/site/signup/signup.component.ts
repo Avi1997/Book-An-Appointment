@@ -26,7 +26,6 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.gender = this.userService.getGenders();
     this.user = {
       user_id: "",
     name: "",
@@ -42,9 +41,9 @@ export class SignupComponent implements OnInit {
       name: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),     
       password: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(15)]),    
       confirmPassword: new FormControl('', [Validators.required]),
-      genderDivision: new FormGroup({
-        gender: new FormControl('')
-      }),
+      appointment_slot_time: new FormControl('',[Validators.required]),
+      day_start : new FormControl('',[Validators.required]),
+      day_end : new FormControl('',[Validators.required]),
       emailId: new FormControl('', [Validators.required, Validators.email])
     });
   }
@@ -58,13 +57,15 @@ export class SignupComponent implements OnInit {
   changeValue() {
     this.userPresent = false;
   }
-
-  
-  
   userAdd(signupForm) {
-    this.user.name = signupForm.value.userName;
+    console.log(signupForm)
+    this.user.name = signupForm.value.name;
     this.user.password = signupForm.value.password;
+    this.user.user_id = signupForm.value.user_id;
     this.user.email = signupForm.value.emailId;
+    this.user.day_start = signupForm.value.day_start;
+    this.user.day_end = signupForm.value.day_end;
+    this.user.appointment_slot_time = signupForm.value.appointment_slot_time;
 
     this.userService.createUser(this.user).subscribe(response => {
       this.successMsg = true;

@@ -25,20 +25,24 @@ export class LoginComponent implements OnInit {
   }
   loginAuthenticate(loginForm) {
     this.infoFlag = false;
-    console.log(loginForm)
-   /*this.authenticationService.authenticate(loginForm.value.username,loginForm.value.password).subscribe((response)=>{
-      this.authenticationService.setToken(response.token);
-      this.authenticationService.setRole(response.role);
-      this.authenticationService.setLogedInUser(loginForm.value.username)
+   this.authenticationService.authenticate(loginForm.value.username,loginForm.value.password).subscribe((response)=>{
+    console.log(response) 
+    if(response !=null){ 
+    this.authenticationService.setToken(response.token);
+      this.authenticationService.setdocId(response.doc_id);
+      this.authenticationService.setLogedInUser(response.name)
       this.authenticationService.login();
       this.userIsThere = true;
-      this.authenticationService.setLogedInUser(loginForm.value.username);
       this.router.navigate(['/doc-home']);
+     }else{
+      this.userIsThere = false;
+      this.authenticationService.setLogedInUser("");
+     }
     },(error)=>{
       if (error.status == 401) {
         this.userIsThere = false;
         this.authenticationService.setLogedInUser("");
       }
-    });*/
+    });
   }
 }

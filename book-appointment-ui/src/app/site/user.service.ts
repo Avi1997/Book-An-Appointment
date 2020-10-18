@@ -12,18 +12,12 @@ export class UserService {
   private bloodGroup: string[];
   private timeSlot: string[];
  
-
-  createUser(user) {
-    let usernew: User = user;
-    return null;//this.httpClient.post(this.baseUrl+"/authentication-service/blood-bank/users", usernew);
-  }
- 
-  
-  constructor(private http:HttpClient) {
-    this.gender = ["Male", "Female"];
-    
-    
+  constructor(private http:HttpClient) {  
+    this.baseUrl = environment.baseUrl;
     this.timeSlot = [ "10", "11", "12", "1", "2", "3", "4", "5","6","7","8","9"];
+  }
+  createUser(user) {
+    return this.http.post(this.baseUrl+"user/signup", user);
   }
 
   getGenders() {

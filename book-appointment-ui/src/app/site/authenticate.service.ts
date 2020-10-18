@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,12 +11,12 @@ export class AuthenticateService {
   private loginFlag: boolean;
   private logedinUser: string = "";
   private token:string;  
-  private role: string;
+  private docId: string;
   baseUrl:string;
   constructor(private httpClient:HttpClient) {
     this.loginFlag = false;
-    this.baseUrl = "/authentication-service/blood-bank/authenticate";
-    this.role = "anonymous";
+    this.baseUrl = environment.baseUrl+"user/login";
+    this.docId = "";
    }
   public setToken(token: string) {
     this.token = token;
@@ -25,12 +26,12 @@ export class AuthenticateService {
     return this.token;
   }
   
-  public getRole() {
-    return this.role;
+  public getdocId() {
+    return this.docId;
   }
   
-  public setRole(role) {
-    this.role = role;
+  public setdocId(docId) {
+    this.docId = docId;
   }
   public getLogedInUser() {
     return this.logedinUser;
@@ -50,7 +51,6 @@ export class AuthenticateService {
 
   authenticate(user: string, password: string): Observable<any> {
     let credentials: string = user + ":" + password;
-    credentials = btoa(credentials);
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', 'Basic ' + credentials);
     return this.httpClient.get(this.baseUrl, { headers });

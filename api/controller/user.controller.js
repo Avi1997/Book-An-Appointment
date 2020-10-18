@@ -5,19 +5,26 @@ const bcrypt = require('bcrypt');
 const app = express.Router();
 const sql = require('../config/mysql');
 const atob = require('atob');
+var base64 = require('base-64');
 
 app.get("/login", async (req, res) => {
     try {
-        const password = atob(req.body.password);
-        const squery = "select doctor.user_id,user.name,doctor.doc_id,user.token from doctor inner join user on doctor.user_id = user.user_id "+"where user.user_id ='" + req.body.user_id + "' and user.password ='" + password + "'";
-       console.log(squery);
-        sql.query(squery, (err, resu, field) => {
-            if (err) {
+        const password = (req.header('Authorization').replace('Basic ', ''));
+        const  credentials = password.split(':');
+        const squery = "select doctor.user_id,user.name,doctor.doc_id,user.token,user.password from doctor inner join user on doctor.user_id = user.user_id "+"where user.user_id ='" + credentials[0] + "'";
+       
+        sql.query(squery, async (err, resu, field) => {
+            if (err && resu.length==0 ) {
                 throw err;
             }
+            let ismatch = await bcrypt.compare(credentials[1], resu[0].password);
+            if(ismatch)
             res.status(201).send(resu[0]);
+            else
+            throw err;
         });
     } catch (e) {
+        console.log(e)
         res.status(401).send(e);
     }
 
