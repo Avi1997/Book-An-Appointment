@@ -7,19 +7,26 @@ import { AuthenticateService } from '../site/authenticate.service';
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
-  navbarIcon : string = "keyboard_arrow_down";
-  login=false;
-  constructor(private auth:AuthenticateService) { }
+  navbarIcon: string = "keyboard_arrow_down";
+  login = false;
+  constructor(private auth: AuthenticateService) { }
 
   ngOnInit(): void {
     this.login = this.auth.islogin();
   }
-
-dropDownButtonClick(){
-  if(this.navbarIcon == "keyboard_arrow_down"){
-    this.navbarIcon = "keyboard_arrow_up"
-  }else{
-    this.navbarIcon = "keyboard_arrow_down"
+  isLogin() {
+    return this.auth.islogin();
   }
-}
+
+  dropDownButtonClick() {
+    if (this.navbarIcon == "keyboard_arrow_down") {
+      this.navbarIcon = "keyboard_arrow_up"
+    } else {
+      this.navbarIcon = "keyboard_arrow_down"
+    }
+  }
+  logOff(){
+    this.auth.setLogeInFlag(false);
+    this.auth.setLogedInUser('');
+  }
 }

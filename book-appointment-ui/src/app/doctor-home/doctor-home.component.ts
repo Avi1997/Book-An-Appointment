@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticateService } from '../site/authenticate.service';
+import { AppointmentService } from './appontment/appointment.service';
 
 @Component({
   selector: 'app-doctor-home',
@@ -8,10 +9,17 @@ import { AuthenticateService } from '../site/authenticate.service';
 })
 export class DoctorHomeComponent implements OnInit {
   user:string;
-  constructor(private authService:AuthenticateService) { }
+  numberOf =0;
+  constructor(private authService:AuthenticateService,private appointmentS:AppointmentService) { }
   
   ngOnInit(): void {
-    this.user = this.authService.getLogedInUser();
+   
+     this.appointmentS.getAppontment().subscribe( (res:any[]) => {
+      this.numberOf = res.length;
+    })
+  }
+  isLogin(){
+    return this.authService.islogin();
   }
 
 }
