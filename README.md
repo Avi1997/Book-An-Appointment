@@ -8,6 +8,7 @@ https://dev.mysql.com/downloads/workbench/
 # mysql installer download link
 https://dev.mysql.com/downloads/mysql/
 
+# install node , angular/cli
 
 # run script present in database folder on mysql workbench first
 
